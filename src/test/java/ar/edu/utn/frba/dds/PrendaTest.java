@@ -17,29 +17,29 @@ public class PrendaTest {
 	@Before
 	public void setUp() {
 
-		this.nuevaPrenda = new NuevaPrenda();
-		this.promocionPrenda = new PromocionPrenda(500);
-		this.liquidacionPrenda = new LiquidacionPrenda();
+		nuevaPrenda = new NuevaPrenda();
+		promocionPrenda = new PromocionPrenda(500);
+		liquidacionPrenda = new LiquidacionPrenda();
 
-		this.saco = new Prenda(8000, nuevaPrenda);
-		this.pantalon = new Prenda(4000, promocionPrenda);
-		this.camisa = new Prenda(2500, liquidacionPrenda);
+		saco = new Prenda(8000, nuevaPrenda);
+		pantalon = new Prenda(4000, promocionPrenda);
+		camisa = new Prenda(2500, liquidacionPrenda);
 
 	}
 
 	@Test
 	public void getPrecioNuevaPrenda() {
-		Assert.assertTrue(this.saco.getPrecio() == 8000.0);
+		Assert.assertTrue(saco.getPrecio() == 8000.0);
 	}
 
 	@Test
 	public void getPrecioPromocionPrenda() {
-		Assert.assertTrue(this.pantalon.getPrecio() == 3500.0);
+		Assert.assertTrue(pantalon.getPrecio() == 3500.0);
 	}
 
 	@Test
 	public void getPrecioLiquidacionPrenda() {
-		Assert.assertTrue(this.camisa.getPrecio() == 1250.0);
+		Assert.assertTrue(camisa.getPrecio() == 1250.0);
 	}
 
 }
