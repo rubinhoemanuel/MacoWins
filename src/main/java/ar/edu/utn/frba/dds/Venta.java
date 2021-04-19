@@ -3,44 +3,28 @@ package ar.edu.utn.frba.dds;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Venta {
+public abstract class Venta {
 
-	private List<Prenda> prendasVendidas;
-	private LocalDate fecha;
-	private TipoPago tipoPago;
-
-	public Venta(List<Prenda> prendasVendidas, LocalDate fecha, TipoPago tipoPago) {
-		this.prendasVendidas = prendasVendidas;
+	protected List<Item> items;
+	protected LocalDate fecha;
+	
+	public Venta(List<Item> items, LocalDate fecha) {
+		this.items = items;
 		this.fecha = fecha;
-		this.tipoPago = tipoPago;
 	}
 
-	public double calcularGanancia() {
-		return this.tipoPago.calcularGanancia(this);
+	protected double importe() {
+		return this.getPrecioItems() + this.getRecargo();
 	}
 
-	public List<Prenda> getPrendasVendidas() {
-		return prendasVendidas;
+	protected double getPrecioItems() {
+		return this.items.stream().mapToDouble(item -> item.importe()).sum();
 	}
-
-	public void setPrendasVendidas(List<Prenda> prendasVendidas) {
-		this.prendasVendidas = prendasVendidas;
-	}
+	
+	protected abstract double getRecargo();
 
 	public LocalDate getFecha() {
 		return fecha;
 	}
-
-	public void setFecha(LocalDate fecha) {
-		this.fecha = fecha;
-	}
-
-	public TipoPago getTipoPago() {
-		return tipoPago;
-	}
-
-	public void setTipoPago(TipoPago tipoPago) {
-		this.tipoPago = tipoPago;
-	}
-
+	
 }

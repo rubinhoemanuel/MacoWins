@@ -9,8 +9,8 @@ public class PromocionPrenda implements EstadoPrenda {
 	}
 
 	@Override
-	public float getPrecio(Prenda prenda) {
-		return prenda.getPrecioBase() - this.valorFijo;
+	public double getPrecio(double precioPropio) {
+		return precioPropio - this.valorFijo;
 	}
 
 	public int getValorFijo() {

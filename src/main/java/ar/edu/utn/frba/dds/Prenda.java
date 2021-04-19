@@ -2,24 +2,42 @@ package ar.edu.utn.frba.dds;
 
 public class Prenda {
 
-	private float precioBase;
+	private double precioPropio;
 	private EstadoPrenda estado;
+	private TipoPrenda tipo;
 
-	public Prenda(float precioBase, EstadoPrenda estado) {
-		this.precioBase = precioBase;
+	public Prenda(double precioPropio, EstadoPrenda estado, TipoPrenda tipo) {
+		this.precioPropio = precioPropio;
+		this.estado = estado;
+		this.tipo = tipo;
+	}
+
+	public double getPrecio() {
+		return estado.getPrecio(this.precioPropio);
+	}
+
+	public double getPrecioPropio() {
+		return precioPropio;
+	}
+
+	public void setPrecioPropio(double precioPropio) {
+		this.precioPropio = precioPropio;
+	}
+
+	public EstadoPrenda getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EstadoPrenda estado) {
 		this.estado = estado;
 	}
 
-	public float getPrecioBase() {
-		return precioBase;
+	public TipoPrenda getTipo() {
+		return tipo;
 	}
 
-	public void setPrecioBase(float precioBase) {
-		this.precioBase = precioBase;
-	}
-	
-	public float getPrecio() {
-		return estado.getPrecio(this);
+	public void setTipo(TipoPrenda tipo) {
+		this.tipo = tipo;
 	}
 
 }

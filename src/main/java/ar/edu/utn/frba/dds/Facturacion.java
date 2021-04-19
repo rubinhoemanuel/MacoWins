@@ -14,7 +14,7 @@ public class Facturacion {
 	
 	public double calcularGananciasVentasPorFecha(LocalDate fecha) {
 		List<Venta> ventasFiltradasPorFecha = this.ventas.stream().filter(venta -> venta.getFecha().compareTo(fecha) == 0).collect(Collectors.toList());
-		return ventasFiltradasPorFecha.stream().mapToDouble(venta -> venta.calcularGanancia()).sum();
+		return ventasFiltradasPorFecha.stream().mapToDouble(venta -> venta.importe()).sum();
 	}
 	
 }

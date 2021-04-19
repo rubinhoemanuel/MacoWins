@@ -9,52 +9,32 @@ import org.junit.Test;
 
 public class VentaTest {
 	
-	private Prenda saco;
-	private Prenda pantalon;
-	private Prenda camisa;
-
-	private NuevaPrenda nuevaPrenda;
-	private PromocionPrenda promocionPrenda;
-	private LiquidacionPrenda liquidacionPrenda;
-	
-	private Venta venta;
-	private PagoEfectivo pagoEfectivo;
-	private PagoTarjeta pagoTarjeta;
-	
-	private List<Prenda> prendas;
+	private VentaEnEfectivo ventaEnEfectivo;
+	private VentaConTarjeta ventaConTarjeta;
 	
 	@Before
 	public void setUp() {
-
-		nuevaPrenda = new NuevaPrenda();
-		promocionPrenda = new PromocionPrenda(500);
-		liquidacionPrenda = new LiquidacionPrenda();
-
-		saco = new Prenda(8000, nuevaPrenda);
-		pantalon = new Prenda(4000, promocionPrenda);
-		camisa = new Prenda(2500, liquidacionPrenda);
 		
-		pagoEfectivo = new PagoEfectivo();
-		pagoTarjeta = new PagoTarjeta(6, 10);
+		List<Item> items;
 		
-		prendas = new ArrayList<Prenda>();
+		items = new ArrayList<Item>();
+		items.add(new Item(new Prenda(8000, new NuevaPrenda(), TipoPrenda.SACO), 1));
+		items.add(new Item(new Prenda(4000, new PromocionPrenda(500), TipoPrenda.PANTALON), 1));
+		items.add(new Item(new Prenda(2500, new LiquidacionPrenda(), TipoPrenda.CAMISA), 1));
 		
-		prendas.add(saco);
-		prendas.add(pantalon);
-		prendas.add(camisa);
+		ventaEnEfectivo = new VentaEnEfectivo(items, LocalDate.now());
+		ventaConTarjeta = new VentaConTarjeta(items, LocalDate.now(), 6, 10);
 		
 	}
 	
 	@Test
 	public void calcularPagoEnEfectivo() {
-		venta = new Venta(prendas, LocalDate.now(), pagoEfectivo);
-		Assert.assertTrue(venta.calcularGanancia() == 12750);		
+		Assert.assertTrue(ventaEnEfectivo.importe() == 12750);		
 	}
 	
 	@Test
 	public void calcularPagoConTarjeta() {
-		venta = new Venta(prendas, LocalDate.now(), pagoTarjeta);
-		Assert.assertTrue(venta.calcularGanancia() == 12750 + 6 * 10 + venta.getPrendasVendidas().stream().mapToDouble(prenda -> prenda.getPrecio() * 0.01).sum());		
+		Assert.assertTrue(ventaConTarjeta.importe() == 12937.5);
 	}
 
 }

@@ -1,15 +1,12 @@
 package ar.edu.utn.frba.dds;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 public class PrendaTest {
 
 	private Prenda saco;
 	private Prenda pantalon;
 	private Prenda camisa;
-
 	private NuevaPrenda nuevaPrenda;
 	private PromocionPrenda promocionPrenda;
 	private LiquidacionPrenda liquidacionPrenda;
@@ -21,9 +18,9 @@ public class PrendaTest {
 		promocionPrenda = new PromocionPrenda(500);
 		liquidacionPrenda = new LiquidacionPrenda();
 
-		saco = new Prenda(8000, nuevaPrenda);
-		pantalon = new Prenda(4000, promocionPrenda);
-		camisa = new Prenda(2500, liquidacionPrenda);
+		saco = new Prenda(8000, nuevaPrenda, TipoPrenda.SACO);
+		pantalon = new Prenda(4000, promocionPrenda, TipoPrenda.PANTALON);
+		camisa = new Prenda(2500, liquidacionPrenda, TipoPrenda.CAMISA);
 
 	}
 
@@ -40,6 +37,21 @@ public class PrendaTest {
 	@Test
 	public void getPrecioLiquidacionPrenda() {
 		Assert.assertTrue(camisa.getPrecio() == 1250.0);
+	}
+	
+	@Test
+	public void verificacionPrendatipoSaco() {
+		Assert.assertTrue(saco.getTipo() == TipoPrenda.SACO);
+	}
+	
+	@Test
+	public void verificacionPrendatipoPantalon() {
+		Assert.assertTrue(pantalon.getTipo() == TipoPrenda.PANTALON);
+	}
+	
+	@Test
+	public void verificacionPrendatipoCamisa() {
+		Assert.assertTrue(camisa.getTipo() == TipoPrenda.CAMISA);
 	}
 
 }
